@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <a class="btn btn-primary" [routerLink]="['/']">
+        <i class="fas fa-arrow-left"></i> &nbsp; Goto List
+      </a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h3> Add New Unit </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="alert alert-success" role="alert" *ngIf="message">
+        {{message}}
+      </div>
+      <form [formGroup]="unitForm" (submit)="addUnit()">
+        <div class="form-group">
+          <label for="unit-code">Unit Code
+            <span class="error" *ngIf="form.unitCode.invalid && isSubmitted">
+              <span *ngIf="form.unitCode.errors.required">
+                This field is required.
+              </span>
+              <span *ngIf="form.unitCode.errors.pattern">
+                unit code should consists of 3 aplbhabets followed by 5 digits e.g. CSC73010
+              </span>
+            </span>
+          </label>
+          <input type="text" class="form-control" id="unit-code" 
+            placeholder="Unit Code" formControlName="unitCode">
+        </div>
+        <div class="form-group">
+          <label for="unit-name">Unit Name
+            <span class="error" *ngIf="form.unitName.invalid && isSubmitted">
+              This field is required.
+            </span>
+          </label>
+          <input type="text" class="form-control" id="unit-name" 
+            placeholder="Unit Name" formControlName="unitName">
+        </div>
+        <div class="form-group">
+          <label for="session">Session
+            <span class="error" *ngIf="form.session.invalid && isSubmitted">
+              This field is required.
+            </span>
+          </label>
+          <select id="session" class="form-control" formControlName="session">
+            <option value="">--select--</option>
+            <option value="Session 1">Session 1</option>
+            <option value="Session 2">Session 2</option>
+            <option value="Session 3">Session 3</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="level">Level
+            <span class="error" *ngIf="form.level.invalid && isSubmitted">
+              This field is required.
+            </span>
+          </label>
+          <select id="level" class="form-control" formControlName="level">
+            <option value="">--select--</option>
+            <option value="Introductory">Introductory</option>
+            <option value="Intermediate">Intermediate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="enrolment">Enrolment
+            <span class="error" *ngIf="form.enrolment.invalid && isSubmitted">
+              <span *ngIf="form.enrolment.errors.required">
+                This field is required.
+              </span>
+              <span *ngIf="form.enrolment.errors.pattern">
+                Must be 0 or greater integer.
+              </span>
+            </span>
+          </label>
+          <input type="number" id="enrolment" class="form-control" 
+            placeholder="Enrolment" formControlName="enrolment">
+        </div>
+        <button class="btn btn-primary" type="submit">Add Unit</button>
+      </form>
+    </div>
+  </div>
+</div>
